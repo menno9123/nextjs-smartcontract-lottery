@@ -57,10 +57,10 @@ export default function LotteryEntrance() {
         params: {},
     })
 
-    const { runContractFunction: getAmountUsdtoWin } = useWeb3Contract({
+    const { runContractFunction: getUsdtoWin } = useWeb3Contract({
         abi: abi,
         contractAddress: raffleAddress,
-        functionName: "getAmountUsdtoWin",
+        functionName: "getUsdtoWin",
         params: {},
     })
 
@@ -69,7 +69,7 @@ export default function LotteryEntrance() {
         const numberOfPlayersFromCall = (await getNumberOfPlayers()).toString()
         const recentWinnerFromCall = (await getRecentWinner()).toString()
         const amountETHtoWin = (await getAmountEthtoWin()).toString()
-        const amountUSDtoWin = (await getAmountUsdtoWin()).toString()
+        const amountUSDtoWin = (await getUsdtoWin()).toString()
         setEntranceFee(entranceFeeFromCall)
         setNumberofPlayers(numberOfPlayersFromCall)
         setRecentWinner(recentWinnerFromCall)
@@ -125,7 +125,9 @@ export default function LotteryEntrance() {
                     <div>
                         Amount of ETH to win:{ethers.utils.formatUnits(amountETHtoWin, "ether")}
                     </div>
-                    <div>Amount of USD to win: {amountUSDtoWin}</div>
+                    <div>
+                        Amount of USD to win: {ethers.utils.formatUnits(amountUSDtoWin, "ether")}
+                    </div>
                 </div>
             ) : (
                 <div>No Raffle Address Detected</div>
